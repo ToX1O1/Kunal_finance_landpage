@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grow Geniuss | Terms & Conditions</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* Custom Styling for Aesthetics */
+    :root {
+      --primary: #4f46e5; /* Indigo-600 */
+      --secondary: #10b981; /* Emerald-500 */
+      --dark: #1f2937; /* Gray-800 */
+      --dark-alt: #111827; /* Gray-900 */
+      --light: #f9fafb; /* Gray-50 */
+    }
+
+    /* Base Styling */
+    html { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--dark-alt); color: var(--light); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-spacing { padding: 80px 0; }
+    
+    /* Utility Overrides for Colors */
+    .bg-dark-alt { background-color: var(--dark-alt); }
+    .text-gradient { 
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--dark-alt);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .navbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--light);
+      display: flex;
+      align-items: center;
+    }
+    .brand i { color: var(--secondary); margin-right: 8px; }
+
+    /* Policy Content Specific Styles */
+    .policy-content h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--light);
+    }
+    .policy-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: var(--secondary);
+      border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+      padding-bottom: 5px;
+    }
+    .policy-content h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+    .policy-content p, .policy-content ul {
+      margin-bottom: 15px;
+      line-height: 1.7;
+      color: #ccc;
+      font-weight: 400;
+    }
+    .policy-content strong {
+        color: var(--light);
+        font-weight: 700;
+    }
+    .policy-content ul {
+        list-style: disc;
+        padding-left: 25px;
+    }
+    .policy-content li {
+        margin-bottom: 8px;
+    }
+
+    /* --- FOOTER STYLES (Comprehensive) --- */
+    .footer {
+      background-color: var(--dark);
+      padding: 50px 0 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 50px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .footer-desc {
+      color: #9ca3af;
+      margin-bottom: 20px;
+      max-width: 350px;
+    }
+    .social-links a {
+      color: #9ca3af;
+      font-size: 1.25rem;
+      margin-right: 15px;
+      transition: color 0.2s ease;
+    }
+    .social-links a:hover { color: var(--secondary); }
+    .footer-grid h5 {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 15px;
+      color: var(--light);
+    }
+    .footer-links li a {
+      color: #9ca3af;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .footer-links li a:hover { color: var(--primary); }
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #6b7280; /* Gray-500 */
+      padding-top: 20px;
+    }
+    .disclaimer strong { color: #9ca3af; }
+    .text-center { text-align: center; margin-top: 10px; }
+    /* --- END FOOTER STYLES --- */
+
+    @media (max-width: 1024px) {
+        .policy-content h1 { font-size: 2rem; }
+        .policy-content h3 { font-size: 1.25rem; }
+        .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="brand">
+                <i class="fas fa-chart-line"></i>
+                Grow Geniuss
+            </a>
+            <!-- Simple Back Link -->
+            <a href="index.html" class="text-primary hover:text-secondary font-semibold">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container section-spacing">
+        <div class="policy-content">
+            <h1 class="text-gradient">Terms & Conditions</h1>
+            
+            <p><strong>Last Updated:</strong> December 14, 2025</p>
+
+            <p>
+            “Grow Geniuss” or “Research Entity” is regulated by the Securities and Exchange Board of India (“SEBI”) and is licensed to carry on the business of share trading research providing service and related activities. The term “you” refers to the user or viewer of our website.
+            </p>
+            <p>
+            Before subscribing to any of our services, we advise you to visit the website and read all terms & conditions carefully. By subscribing, you agree to be bound by these terms & conditions, which may be updated without prior notice.
+            </p>
+            
+            <h3>Use of Services</h3>
+            <p>Your continuous use of the Grow Geniuss website means you accept any new or modified terms and conditions that we publish.</p>
+
+            <h3>Investment and Market Risks</h3>
+            <p>Investment/trading in the Share Market is subject to market risks and there is no assurance or guarantee that objectives of any services will be achieved. We do not offer guaranteed/assured returns. Past performance does not guarantee future results.</p>
+            
+            <h3>Refund & Cancellation Policy</h3>
+            <p>We do not have any refund or cancellation policy. All sales are final. Before subscribing, ensure that our products and services meet your needs. No refunds will be offered on subscriptions already taken.</p>
+
+            <h3>Disclaimers</h3>
+            <p>
+            Research recommendations are interpretations/views of analysts and should not be considered as financial advice. Grow Geniuss and its associates are not liable for trades executed on the basis of recommendations or reports. Comparative indices or indicators on the website are for reference only and not a basis for investment decisions. We are not responsible for delays or issues caused during fund transfers; respective banks hold responsibility.
+            </p>
+
+            <h3>Liability Limitations</h3>
+            <p>
+            We are not liable for any indirect, special, or consequential losses including lost profits, contracts, goodwill, or data. By using this website, you agree that the limitations of liability are reasonable. If not, you must discontinue usage.
+            </p>
+
+            <h3>Intellectual Property</h3>
+            <p>All layout, design, original artwork, and other intellectual property remain the property of Grow Geniuss. They may not be used or reproduced without express written permission.</p>
+
+            <h3>Governing Law and Jurisdiction</h3>
+            <p>
+            Your use of this website is subject to the laws of India. You consent to the exclusive jurisdiction of courts in Mumbai or Navi Mumbai, Maharashtra, India. Use of this website is unauthorized in jurisdictions that do not enforce these terms.
+            </p>
+            
+            <h3>Privacy Statement</h3>
+            <p>
+            Your privacy is important to Grow Geniuss. This privacy statement provides information about the personal information that Grow Geniuss Services collects, and the ways in which Grow Geniuss uses that information.
+            </p>
+
+            <h4>Personal Information Collection</h4>
+            <p>Grow Geniuss may collect and use the following kinds of personal information:</p>
+            <ul>
+                <li>Information about your use of this website.</li>
+                <li>Information you provide during registration on the Website.</li>
+                <li>Information about transactions carried out on this Website.</li>
+                <li>Information provided for subscribing to our services.</li>
+                <li>Any other information that you send to Grow Geniuss.</li>
+            </ul>
+
+            <h4>Using Personal Information</h4>
+            <p>Grow Geniuss may use your personal information to:</p>
+            <ul>
+                <li>Administer this Website.</li>
+                <li>Personalize the Website for you.</li>
+                <li>Enable your access to and use of Website services.</li>
+                <li>Publish information about you on the Website.</li>
+                <li>Send products or services that you purchase.</li>
+                <li>Send statements, invoices, and collect payments.</li>
+                <li>Send you marketing communications.</li>
+            </ul>
+            <p>Where required, we may disclose personal information to employees/agents or subcontractors strictly for these purposes, bound by confidentiality obligations. We may also contact you for promotions unless you specifically request not to receive such communications. Additionally, Grow Geniuss may disclose your personal information if required by law or legal proceedings.</p>
+
+            <h4>Securing Your Data</h4>
+            <p>
+            We take reasonable technical and organizational precautions to prevent the loss, misuse, or alteration of your personal information. Grow Geniuss stores personal information on secure servers. Electronic transactions entered via this Website are protected by encryption technology.
+            </p>
+
+            <h4>Cross-Border Data Transfers</h4>
+            <p>
+            Information collected may be stored and processed in other countries where Grow Geniuss operates, in compliance with this Privacy Policy. Information submitted for publication on the website may be published on the internet and be accessible worldwide.
+            </p>
+
+            <h4>Updating This Statement and Other Websites</h4>
+            <p>
+            Grow Geniuss may update this Privacy Policy by posting a new version on this Website. We recommend checking this page occasionally to stay informed about changes. This Website may contain links to other websites. Grow Geniuss is not responsible for the privacy policies or practices of any third-party sites.
+            </p>
+
+            <h4>Contact & Agreement</h4>
+            <p>For questions regarding this Privacy Policy or the treatment of your personal information, contact us via email: 📧 support@growgenius.in. By visiting our site, you agree to be bound by the terms of this Privacy Policy and any modifications made over time. If you do not agree, you should exit the site immediately.</p>
+            
+            <h3>Registration / Enrolment and Termination</h3>
+            <p>By registering for our services, you agree that Grow Geniuss reserves the right, at its sole discretion, to deny you access to the Website without notice for reasons including: unauthorized access or use; attempted transfer of rights granted under this Agreement; or violation of terms and conditions. Termination does not affect any rights Grow Geniuss may have in law or equity.</p>
+
+            <h3>License</h3>
+            <p>Grow Geniuss grants you a limited, non-exclusive, non-transferable license to access the Website. Your access and use of the Website are strictly governed by the terms of this Privacy Policy and User Agreement.</p>
+
+            <h3>Security and Unauthorized Use</h3>
+            <p>
+            Unauthorized use of this Website and systems, including, but not limited to, unauthorized entry into Grow Geniuss’s systems, online accounts, Client Desks, Partners & Distributor Desks, misuse of passwords or misuse of any other information, is strictly prohibited. You may not use this Website in any manner that could damage, disable, overburden, or impair this Website or service or interfere with any other party’s use and enjoyment of this Website or service. You may not attempt to gain unauthorized access to any of our site or service and computer systems or networks connected to it, through hacking. You agree that you will not engage in any activities related to this web site that are contrary to the applicable laws or regulations in force. The users have the primary responsibility to keep their login-ids and passwords secure and to not display such crucial, important information to any third person. In case of any such leak of login-id & password, Grow Geniuss cannot be responsible for the loss of such information, or for any act, omission, damages, claims, loss of personal information, etc. arising from the use of such leakage of login-ids and passwords. Grow Geniuss may, at its own discretion, use certain technology on its web sites to collect information from visitors and may compile aggregate statistical information about how visitors use its web sites, including information relating to the frequency of visits, the average length of visits, which pages are viewed during a visit. No individually identifiable information is collected for this purpose and Grow Geniuss Services does not monitor individual visitor behaviour.
+            </p>
+
+            <h3>Service Delays</h3>
+            <p>
+            Grow Geniuss reserves its right, in its sole discretion, without any obligation and without any notice requirement, to change, improve or correct the information, materials and descriptions on this web site and to suspend and/or deny access to this web site for scheduled or unscheduled maintenance, upgrades, improvements or corrections. Grow Geniuss may discontinue or change any service described in or offered on this web site or in any modules or parts thereof at any time if deemed fit and proper. Grow Geniuss (including its owner, directors, employees, affiliates, agents, representatives or subcontractors) shall not be liable for any loss or liability resulting, directly or indirectly, from delays or interruptions due to electronic or mechanical equipment failures, telephone interconnect problems, defects, weather, strikes, walkouts, fire, riots, armed conflicts, acts of war, pandemic situations or other like causes. Grow Geniuss shall have no responsibility to provide you access to the Website while interruption of the Website is due to any such cause shall continue.
+            </p>
+
+            <h3>Products Offered on the Website</h3>
+            <p>With respect to the data from Capital Markets and the products made available on the Website by Grow Geniuss including but not limited to stocks, reports etc. YOU HEREBY AGREE THAT: –</p>
+            <ul>
+                <li>You confirm that the details provided by you are true and correct.</li>
+                <li>You hereby declare that the amount being transferred by you for the purpose of subscribing to any of Grow Geniuss research services is derived through legitimate sources and is not held or designed for the purpose of contravention of any Act, Rules, Regulations or any statute or legislation or any other applicable laws or any Notifications, Directions issued by any governmental, regulatory or statutory authority/Lies from time to time.</li>
+                <li>You agree that Grow Geniuss sources the data from the Capital Markets and is/are therefore not responsible and/or should be held liable by you for the correctness or accuracy of any information received in that regard from the Capital Markets.</li>
+                <li>You agree that the National Stock Exchange (“NSE”) data displayed on the site is always delayed by five (5) minutes whereas the Bombay Stock Exchange (“BSE”) data displayed on the site is delayed by fifteen (15) minutes; and technical glitches if any, may further delay the data at times and that you will not hold Grow Geniuss responsible for any such delays in receiving the data / feeds from time to time.</li>
+                <li>You agree that the authenticity of the data received from Capital Markets is not guaranteed by Grow Geniuss and that Grow Geniuss Services shall assume no responsibility or liability in any manner whatsoever for such data and your subsequent trade, action etc. acting upon such data.</li>
+            </ul>
+
+            <h3>General Liability and Indemnification</h3>
+            <p>
+            You agree that, Grow Geniuss (including its owner, officers, directors, employees, affiliates, group companies, agents, representatives or subcontractors) shall not be, in any event, be liable, whether in contract or tort, for any direct, special, indirect, consequential or incidental damages or other damages of any kind whatsoever arising out of the use or inability to use Grow Geniuss Services (“the Website”) for any purpose whatsoever even if Grow Geniuss Services or any other such party has been advised of the possibility thereof. This limitation on liability includes, but is not limited to, the transmission of any viruses which may infect a user’s equipment, failure of mechanical or electronic equipment or communication lines, telephone or other interconnect problems, unauthorized access, theft, operator errors, strikes or other labor problems or any force majeure. Grow Geniuss and its owner, officers, directors, employees and agents shall have no liability in tort, contract, or otherwise to the user and/or any third party.
+            </p>
+            <p>
+            You shall indemnify, defend and hold harmless Grow Geniuss (including its owner, officers, directors, employees, affiliates, group companies, agents, representatives or subcontractors) from any and all claims and losses imposed on, incurred by or asserted as a result of or related to: (a) your access and use of Grow Geniuss (“the Website”), (b) any non-compliance by user with the terms and conditions hereof; or (c) any third party actions related to users receipt and use of the information, whether authorized or unauthorized.
+            </p>
+
+            <h3>Entire Agreement</h3>
+            <p>
+            This User Agreement constitutes the entire agreement between the parties and is inclusive of any other written agreement existing between you and Grow Geniuss and Research Services. By using the information on the Grow Geniuss Website, you assume full responsibility for any gains and losses, financial, emotional, or otherwise, experienced, suffered, or incurred by you. The Website does not guarantee the accuracy, completeness or timeliness of, or otherwise endorse in any way, the views, opinions, or recommendations expressed in the Information, does not give investment advice and does not advocate the purchase or sale of any security or investment. The Information is not intended to provide tax, legal, or investment advice, which you should obtain from your professional advisor before making any investment. The service is provided “as is,” without warranty of any kind, either express or implied. Grow Geniuss disclaims any warranties, including, but not limited to, availability, accuracy, usefulness, or content of information, products or services, or warranties of title, non-infringement, merchantability, or fitness for a particular purpose.
+            </p>
+
+            <h3>Exclusive Jurisdiction</h3>
+            <p>The terms of this agreement are exclusively based on and subject to Indian law. You consent to the exclusive jurisdiction and venue of courts in Thane, Maharashtra, India in all disputes arising out of or relating to the use of this website. Use of this website is unauthorized in any jurisdiction that does not give effect to all provisions of these terms and conditions.</p>
+
+            <h3>Code of Ethics and Conduct</h3>
+            <h4>Copyright License and Enforcement</h4>
+            <p>
+            Copyright © 2022 Grow Geniuss and Research Services. The copyright in this website and the material on this website (including text, artwork, photographs, images, music, audio, video, and audiovisual material) is owned by Grow Geniuss and Research Services and its licensors. Grow Geniuss and Research Services grant you a non-exclusive royalty-free revocable license to: View this website and its material on a computer or mobile device via a web browser; Copy and store this website and its material in your web browser cache memory; Print pages from this website for personal non-commercial use. All other rights are reserved. You must not adapt, edit, change, transform, republish, redistribute, broadcast, or display this website or its material without prior written permission.
+            </p>
+            <p>The automated and/or systematic collection of data from this website is prohibited.</p>
+            <p>
+            Grow Geniuss and Research Services take the protection of copyright materials seriously. If Grow Geniuss discovers that you have used copyright materials in contravention of the license, they may bring legal proceedings against you for an injunction or monetary damages, including legal costs. If you become aware of any use that contravenes the license or infringes on copyright, please notify via 📧 support@growgenius.in
+            </p>
+
+            <h3>Before You Start Trading</h3>
+            <p>Users should read all terms, conditions, and disclaimers before engaging in any trading or investing activity based on information from Grow Geniuss.</p>
+
+            <h4>Secure Fund Transfer and Payments</h4>
+            <p>
+            Payment for all research services should be made in the current account of Grow Geniuss and Research Services only. No payment should be made in any account of an employee/associate of Grow Geniuss Services and Research Services or any other individual under any condition.
+            </p>
+            <p>
+            In case of payment through Pay Order, Demand Draft, Banker’s Cheque, NEFT, or RTGS, provide the following proof of payment:
+            </p>
+            <ul>
+                <li>Certificate from the issuing bank on its letterhead or a plain paper with the seal of the issuing bank.</li>
+                <li>Certified copy of the requisition slip (portion which is retained by the bank) to issue the instrument.</li>
+                <li>Certified copy of the passbook/bank statement for the account debited to issue the instrument.</li>
+                <li>Authentication of the bank account number debited and name of the account holder by the issuing bank on the reverse of the instrument.</li>
+                <li>Track your ledger regularly to check the credit for payment of funds.</li>
+            </ul>
+
+            <h3>Customer Awareness of Security</h3>
+            <p>Let’s face it, hackers are smart, and they’re only getting better by the minute. So, while we work hard to keep the bad guys at bay, here’s what you can do to stay protected at all times.</p>
+
+            <h4>Beware of Fraud</h4>
+            <ul>
+                <li>Don’t provide personal information such as Customer IDs, Passwords, and One Time Passwords (OTP) to anybody over the phone, on the internet, or via email.</li>
+                <li>Don’t open or click on attachments included in emails from organizations or people you don’t know.</li>
+            </ul>
+
+            <h4>How to Detect a Fake Email or Website</h4>
+            <ul>
+                <li>A message stating that your account may have been compromised, and asking for personal information.</li>
+                <li>An email promising prize money for completing a survey or answering questions that compel you to reveal personal information.</li>
+                <li>An email directing you to a fake website designed to look like the real thing.</li>
+            </ul>
+            
+            <h4>How Fraudsters May Try to Trick You (Phishing/Malware)</h4>
+            <ul>
+                <li><strong>Phishing:</strong> Fake emails appearing to be sent by a credible source to compel you to reveal personal information.</li>
+                <li><strong>Vishing:</strong> Phone calls by people pretending to work for Grow Geniuss or another legitimate business, asking you to reveal personal information.</li>
+                <li><strong>Trojan / Virus:</strong> Programs inadvertently installed on your computer to steal sensitive information or spy on you.</li>
+                <li><strong>Ransomware:</strong> Malware that infects your computer, blocks access to files, and demands money to regain access.</li>
+                <li><strong>Spyware:</strong> Software that secretly monitors activity on your computer and reports back to the fraudster.</li>
+            </ul>
+
+            <h4>How You Can Secure Your Passwords</h4>
+            <ul>
+                <li>Ignore requests from organizations or individuals requesting you to verify your passwords or PINs.</li>
+                <li>Memorize your passwords instead of writing them down, and don’t share them with anybody.</li>
+                <li>Change your passwords every 90 days or less.</li>
+                <li>Use a combination of letters, numbers, and special characters with a mix of upper- and lower-case letters.</li>
+                <li>Avoid using family names, pets’ names, important dates, common names, or words in foreign languages.</li>
+            </ul>
+
+            <h4>How We’re Working to Keep You Safe</h4>
+            <ul>
+                <li><strong>Security Implementations:</strong> All systems are secured using firewalls, intrusion detection/prevention systems, and anti-malware solutions.</li>
+                <li><strong>Website Certificate:</strong> The SSL Certificate provides visual indicators (green address bar/padlock) verifying the website’s authenticity. Do not log in if the padlock or address bar turns red or appears broken.</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- FOOTER (Full Structure) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="brand mb-20">Grow Geniuss</a>
+            <p class="footer-desc">
+              Empowering Indian traders with institutional-grade data, expert insights, and disciplined risk management strategies.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          
+          <div>
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#why-us">Why Us</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Legal</h5>
+           <ul class="footer-links">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Contact Us</h5>
+            <ul class="footer-links">
+              <li><a ><i class="fas fa-phone"></i> +91 81690 02642</a></li>
+              <li><a ><i class="fas fa-envelope"></i> info@stockwiseiq.in</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> Stock wise IQ, Sanpada, Thane, Pin: 400705</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          <p><strong>Risk Disclosure:</strong> Investment in securities market are subject to market risks. Read all the related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. The securities quoted are for illustration only and are not recommendatory.</p>
+          <br>
+          <p class="text-center">&copy; <span id="year-terms"></span> Grow Geniuss Financial Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+        document.getElementById('year-terms').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

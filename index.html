@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Grow Geniuss - India's Premier F&O Trading Platform. SEBI Registered expert guidance.">
+  <title>Grow Geniuss | Premier F&O Trading Platform</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-mesh"></div>
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#home" class="brand">
+        <i class="fas fa-chart-line"></i>
+        Grow Geniuss
+      </a>
+
+      <button class="mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="packages.html" class="nav-link">Packages</a></li>
+          <li><a href="#why-us" class="nav-link">Why Us</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <!-- Login Button Removed as requested -->
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero container">
+      <div class="hero-grid">
+        <div class="hero-content fade-up">
+          <h1>
+            Trade Smarter with 
+            <span class="text-gradient">Institutional Grade</span> Intelligence
+          </h1>
+          <p>
+            Join India's fastest-growing community of disciplined traders. Get SEBI-registered calls, AI-powered trend analysis, and superior risk management strategies for Nifty & Bank Nifty.
+          </p>
+          <div class="hero-btns">
+            <!-- UPDATED TEXT: Start Free Trial -> Join Us -->
+            <button class="btn btn-primary modal-trigger">Join Us <i class="fas fa-arrow-right"></i></button>
+            <!-- Explore Features Button Removed as requested -->
+          </div>
+
+          <div class="trust-badges">
+            <div class="t-badge"><i class="fas fa-shield-alt"></i> SEBI Registered</div>
+            <div class="t-badge"><i class="fas fa-users"></i> 50k+ Traders</div>
+            <div class="t-badge"><i class="fas fa-bolt"></i> Low Latency</div>
+          </div>
+        </div>
+
+        <div class="hero-visual fade-up">
+          <div class="chart-card">
+            <div class="chart-header">
+              <span class="chart-title">BANKNIFTY <span class="live-badge">LIVE</span></span>
+              <span class="chart-subtitle">15m Timeframe</span>
+            </div>
+            <!-- Wrapper to control chart size -->
+            <div class="chart-wrapper">
+              <canvas id="heroChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="floating-stat stat-profit">
+            <i class="fas fa-arrow-up text-green"></i>
+            <div>
+              <div class="stat-value">+12.4%</div>
+              <div class="stat-label">Weekly ROI</div>
+            </div>
+          </div>
+          
+          <div class="floating-stat stat-users">
+            <i class="fas fa-user-check text-secondary"></i>
+            <div>
+              <div class="stat-value">85%</div>
+              <div class="stat-label">Accuracy Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section-spacing container">
+      <div class="section-header fade-up">
+        <span class="subtitle">Platform Capabilities</span>
+        <h2>Institutional Tools for Retail Traders</h2>
+        <p class="section-desc">We bridge the gap between retail and institutional trading with professional data, speed, and accuracy.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <div class="icon-box"><i class="fas fa-bullseye"></i></div>
+          <h4>Precision Calls</h4>
+          <p>Get entry, exit, and stop-loss levels derived from quantitative models and technical analysis, not just gut feeling.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <div class="icon-box"><i class="fas fa-brain"></i></div>
+          <h4>Risk Management</h4>
+          <p>We prioritize capital protection. Our strategies are designed to maintain a healthy Risk:Reward ratio of 1:2 minimum.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
+          <h4>Real-time Analytics</h4>
+          <p>Access our dashboard for Option Chain analysis, PCR ratios, and OI spurts to catch market moves before they happen.</p>
+        </div>
+        <div class="feature-card fade-up">
+          <div class="icon-box"><i class="fas fa-graduation-cap"></i></div>
+          <h4>Education First</h4>
+          <p>Don't just copy trades. Learn the logic behind every call with our daily pre-market and post-market reports.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US SECTION -->
+    <section id="why-us" class="section-spacing bg-dark-alt">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="subtitle">Our Edge</span>
+          <h2>Why 50,000+ Traders Choose Us</h2>
+          <p class="section-desc">It's not just about signals; it's about consistency, trust, and proven results.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid fade-up" style="margin-bottom: 80px;">
+          <div class="stat-item">
+            <h3>₹50Cr+</h3>
+            <p>Daily Turnover</p>
+          </div>
+          <div class="stat-item">
+            <h3>50k+</h3>
+            <p>Active Users</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.8/5</h3>
+            <p>User Rating</p>
+          </div>
+          <div class="stat-item">
+            <h3>24/7</h3>
+            <p>Expert Support</p>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials-grid">
+          <div class="review-card fade-up">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="review-text">"I've tried 5 different advisory services, but Grow Geniuss is the only one that focuses on Risk Management. My capital is finally safe and growing."</p>
+            <div class="user-info">
+              <div class="avatar">R</div>
+              <div>
+                <div class="user-name">Rajesh Kumar</div>
+                <div class="user-role">Professional Trader, Mumbai</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card fade-up">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+            <p class="review-text">"The accuracy in Bank Nifty expiry moves is insane. Recovered my past losses in just 2 months. Highly recommended for beginners."</p>
+            <div class="user-info">
+              <div class="avatar bg-secondary">S</div>
+              <div>
+                <div class="user-name">Sneha Patel</div>
+                <div class="user-role">IT Professional, Bangalore</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card fade-up">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p class="review-text">"Transparent and honest. If the market is choppy, they tell us to stay out. That honesty is rare in this industry."</p>
+            <div class="user-info">
+              <div class="avatar bg-accent">A</div>
+              <div>
+                <div class="user-name">Amit Verma</div>
+                <div class="user-role">Business Owner, Delhi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section-spacing container">
+      <div class="section-header fade-up">
+        <span class="subtitle">Get In Touch</span>
+        <h2>We're Here to Help</h2>
+        <p class="section-desc">Have questions about our premium plans or need support? Reach out to us.</p>
+      </div>
+
+      <div class="contact-wrapper fade-up">
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h5>Visit Us</h5>
+              <p>1204, Tower B, Trade Centre,<br>BKC, Mumbai, Maharashtra 400051</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h5>Email Us</h5>
+              <p>support@growgenius.in<br>sales@growgenius.in</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <h5>Call Us</h5>
+              <p>+91 98765 43210<br>Mon-Fri, 9am - 6pm</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-input" placeholder="Your Full Name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-input" rows="4" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="container cta-section">
+      <div class="cta-banner fade-up">
+        <h2 class="cta-title">Ready to Upgrade Your Trading?</h2>
+        <p class="cta-desc">Join 50,000+ traders making smarter decisions today.</p>
+        <!-- UPDATED TEXT: Get Started Now -> Join Us Now -->
+        <button class="btn btn-white modal-trigger">
+          Join Us Now
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="#" class="brand mb-20">Grow Geniuss</a>
+            <p class="footer-desc">
+              Empowering Indian traders with institutional-grade data, expert insights, and disciplined risk management strategies.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          
+          <div>
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#why-us">Why Us</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Legal</h5>
+            <ul class="footer-links">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Contact Us</h5>
+            <ul class="footer-links">
+              <li><a><i class="fas fa-phone"></i> +91 81690 02642</a></li>
+              <li><a ><i class="fas fa-envelope"></i> info@stockwiseiq.in</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> Stock wise IQ, Sanpada, Thane, Pin: 400705</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          <p><strong>Risk Disclosure:</strong> Investment in securities market are subject to market risks. Read all the related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. The securities quoted are for illustration only and are not recommendatory.</p>
+          <br>
+          <p class="text-center">&copy; <span id="year"></span> Grow Geniuss Financial Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- MODAL -->
+  <div id="leadModal" class="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      
+      <div class="modal-header">
+        <h3>Join Our Community</h3> <!-- Updated Modal Title -->
+        <!-- <p>Get 3 days of premium access for free.</p> -->
+      </div>
+
+      <form id="leadForm">
+        <div class="form-group">
+          <input type="text" class="form-input" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" class="form-input" placeholder="Mobile Number" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-input" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <select class="form-input text-dark">
+            <option value="" disabled selected>Experience Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="pro">Professional</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-full">Get Onboard Now</button>
+      </form>
+      <p class="modal-footer-note">
+        <i class="fas fa-lock"></i> Your data is 100% secure with us.
+      </p>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script>
+    // --- Existing script.js content integrated here for a single-file solution ---
+
+    // 1. Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const navLinkEls = document.querySelectorAll('.nav-link');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.querySelector('i').classList.toggle('fa-bars');
+      menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Close menu when a link is clicked (for mobile)
+    navLinkEls.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          menuToggle.querySelector('i').classList.remove('fa-times');
+          menuToggle.querySelector('i').classList.add('fa-bars');
+        }
+      });
+    });
+
+    // 2. Modal Logic
+    const modal = document.getElementById('leadModal');
+    const modalTriggers = document.querySelectorAll('.modal-trigger');
+    const modalClose = document.querySelector('.modal-close');
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    
+    // Prevent form submission (for demo purposes)
+    const leadForm = document.getElementById('leadForm');
+    if (leadForm) {
+      leadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Here you would typically send data to a server
+        console.log('Lead form submitted (demo)');
+        closeModal();
+      });
+    }
+    
+    // 3. Smooth Scroll Navigation (Fix for Why Us tab dash)
+    navLinkEls.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Manually set the active class immediately on click
+            navLinkEls.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+
+            const href = this.getAttribute('href');
+
+            // Only intercept internal hash links — allow normal navigation for pages (e.g. packages.html)
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            // else: do nothing so browser follows the link to another page
+        });
+    });
+
+    // 4. Scroll Spy for Highlighting Active Link
+    const sections = document.querySelectorAll('section');
+    const navBar = document.querySelector('.navbar');
+
+    function scrollSpy() {
+      let current = '';
+      const navHeight = navBar.offsetHeight;
+
+      // Determine the section currently in view
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - navHeight - 1; // Adjust for navbar height
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      // Highlight the corresponding navigation link
+      navLinkEls.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', scrollSpy);
+    window.addEventListener('load', scrollSpy); // Run on load to set initial state
+
+    // 5. Header Stickiness (optional but often expected)
+    function checkHeaderStickiness() {
+        if (window.pageYOffset > 50) {
+            navBar.classList.add('sticky');
+        } else {
+            navBar.classList.remove('sticky');
+        }
+    }
+    window.addEventListener('scroll', checkHeaderStickiness);
+    window.addEventListener('load', checkHeaderStickiness);
+
+    // 6. Fade-up Animations (Intersection Observer)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Stop observing once visible
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(element => {
+      observer.observe(element);
+    });
+
+    // 7. Dynamic Year in Footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 8. Demo Chart.js Initialization
+    function initializeChart() {
+        const ctx = document.getElementById('heroChart');
+        if (!ctx) return;
+
+        const data = {
+            labels: ['9:15', '10:00', '10:45', '11:30', '12:15', '1:00', '1:45', '2:30', '3:30'],
+            datasets: [{
+                label: 'BANKNIFTY',
+                data: [47000, 47100, 47050, 47250, 47300, 47200, 47400, 47550, 47500],
+                borderColor: '#1e90ff', // A strong blue color
+                backgroundColor: 'rgba(30, 144, 255, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3,
+                pointHoverRadius: 5,
+                borderWidth: 3,
+                pointBackgroundColor: '#1e90ff',
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            title: (tooltipItems) => {
+                                return `Time: ${tooltipItems[0].label}`;
+                            },
+                            label: (context) => {
+                                return `Price: ${context.formattedValue}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            borderColor: '#3c4043'
+                        },
+                        ticks: {
+                            color: '#e0e0e0'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: '#3c4043',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#e0e0e0'
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    }
+    
+    // Initializing the chart on window load
+    window.addEventListener('load', initializeChart);
+
+    // --- End of script.js content ---
+  </script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Grow Geniuss - Premium F&O Trading Packages. Choose your plan.">
+  <title>Grow Geniuss | Premium Packages</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN for modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Inline styles kept for self-contained, runnable code -->
+  <style>
+    :root {
+      --primary-color: #1e90ff; /* Dodger Blue */
+      --secondary-color: #ff4757; /* Cinnabar Red */
+      --accent-color: #ffd32a; /* Yellow */
+      --text-color: #e0e0e0;
+      --bg-dark: #12121e;
+      --bg-dark-alt: #1a1a2b;
+      --card-bg: #212133;
+      --border-color: #3c4043;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-color);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1400px; /* Increased max width to handle more columns */
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Mesh background */
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 10% 20%, rgba(30, 30, 50, 0.5) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(50, 30, 80, 0.5) 0%, transparent 40%);
+      background-size: 200% 200%;
+      animation: mesh-move 20s infinite alternate;
+    }
+    @keyframes mesh-move {
+      from { background-position: 0% 0%; }
+      to { background-position: 100% 100%; }
+    }
+
+    /* Header */
+    .navbar {
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(18, 18, 30, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .navbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .brand i {
+        color: var(--primary-color);
+        margin-right: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    .nav-link {
+      color: var(--text-color);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      padding: 0.25rem 0;
+      position: relative;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-color);
+    }
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary-color);
+        border-radius: 9999px;
+    }
+    .mobile-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+    
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--bg-dark);
+    }
+    .btn-primary:hover {
+        background-color: #1c7ed6;
+    }
+    .btn-white {
+        background-color: white;
+        color: var(--bg-dark);
+        border-color: white;
+    }
+
+    /* Packages Section Styles */
+    .section-spacing {
+      padding: 6rem 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .subtitle {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+        max-width: 700px;
+        margin: 0 auto;
+        color: #b0b0b0;
+    }
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    .package-card {
+        background: linear-gradient(145deg, #1a1a2b, #212133);
+        border-radius: 1rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    .package-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(30, 144, 255, 0.3);
+    }
+    .package-card.highlight {
+        border-color: var(--accent-color);
+        background: linear-gradient(145deg, #2a2a40, #303050); /* Slightly different background for highlight */
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(255, 211, 42, 0.3);
+    }
+    .package-card h3 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        color: white;
+    }
+    .package-card h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+    }
+    .price {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+    .package-card ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+    .package-card ul li {
+        display: flex;
+        align-items: start;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        color: #c0c0c0;
+    }
+    .package-card ul li i {
+        color: #2ecc71; /* Green checkmark */
+        margin-top: 0.25rem;
+    }
+    .risk-level {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #a0a0a0;
+    }
+    .risk-level strong {
+        color: var(--secondary-color);
+    }
+    
+    /* Tier Headers */
+    .tier-header {
+        grid-column: 1 / -1; /* Span full width of the grid */
+        text-align: center;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    .tier-header h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    .footer {
+        margin-top: auto; /* Push footer to the bottom */
+        background-color: var(--bg-dark-alt);
+        padding: 3rem 0 1rem 0;
+        border-top: 1px solid var(--border-color);
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        padding-bottom: 3rem;
+    }
+    .footer-desc {
+        color: #b0b0b0;
+        margin-bottom: 1rem;
+    }
+    .social-links a {
+        color: white;
+        font-size: 1.25rem;
+        margin-right: 1rem;
+        transition: color 0.2s ease;
+    }
+    .social-links a:hover {
+        color: var(--primary-color);
+    }
+    .footer-links {
+        list-style: none;
+        padding: 0;
+    }
+    .footer-links h5 {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    .footer-links li a {
+        color: #b0b0b0;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .footer-links li a:hover {
+        color: var(--primary-color);
+    }
+    .disclaimer {
+        border-top: 1px solid var(--border-color);
+        padding-top: 1.5rem;
+        font-size: 0.8rem;
+        color: #808080;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block;
+      }
+      .navbar-inner {
+        position: relative;
+      }
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(18, 18, 30, 0.95);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+      }
+      .nav-links.open {
+        max-height: 300px;
+        padding: 1rem 0;
+      }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0;
+      }
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+      .package-card.highlight {
+          transform: scale(1.0); /* Avoid too much scaling on small screens */
+      }
+      .tier-header {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="bg-mesh"></div>
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html#home" class="brand">
+        <i class="fas fa-chart-line"></i>
+        Grow Geniuss
+      </a>
+
+      <button class="mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#features" class="nav-link">Features</a></li>
+          <li><a href="packages.html" class="nav-link active">Packages</a></li>
+          <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow bg-dark-alt">
+    
+    <!-- PACKAGES SECTION -->
+    <section id="pricing" class="section-spacing pt-12">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="subtitle">Pricing Plans</span>
+          <h2>Index F&O Advisory Packages</h2>
+          <p class="section-desc">
+            Choose a package that fits your duration and capital requirements. All plans emphasize disciplined trading and clear risk management.
+          </p>
+        </div>
+        
+        <div class="packages-grid">
+
+          <!-- PREMIUM TIER HEADER -->
+          <div class="tier-header fade-up">
+            <h2>Index Options - Premium Tier</h2>
+          </div>
+          
+          <!-- Premium Package 1: Monthly -->
+          <div class="package-card fade-up">
+            <h3>Premium</h3>
+            <h4>Monthly</h4>
+            <div class="price">₹125,000</div>
+            <p class="mb-4 text-sm text-gray-400">Billed monthly. Focused on daily action.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Daily trade alert of BN/Nifty/Finnifty/Midcap options.</li>
+              <li><i class="fas fa-check-circle"></i> Weekly trade alert of Bankex/Sensex/Midcap.</li>
+              <li><i class="fas fa-check-circle"></i> Expiry Special research alerts on every weekly expiry and BTST.</li>
+              <li><i class="fas fa-check-circle"></i> Well-researched targets and stop-loss on every alert.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Premium Package 2: Quarterly (Highlight) -->
+          <div class="package-card fade-up highlight">
+            <h3>Premium</h3>
+            <h4>Quarterly</h4>
+            <div class="price">₹325,000</div>
+            <p class="mb-4 text-sm text-gray-400">Billed quarterly. Save 13% vs. monthly.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Daily trade alert of BN/Nifty/Finnifty/Midcap options.</li>
+              <li><i class="fas fa-check-circle"></i> Weekly trade alert of Bankex/Sensex/Midcap.</li>
+              <li><i class="fas fa-check-circle"></i> Expiry Special research alerts on every weekly expiry and BTST.</li>
+              <li><i class="fas fa-check-circle"></i> Well-researched targets and stop-loss on every alert.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Premium Package 3: Half Yearly -->
+          <div class="package-card fade-up">
+            <h3>Premium</h3>
+            <h4>Half Yearly</h4>
+            <div class="price">₹610,000</div>
+            <p class="mb-4 text-sm text-gray-400">Billed semi-annually. Increased alert frequency.</p>
+            
+            <ul>
+              <li><i class="fas fa-check-circle"></i> **One to two** research alerts per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Daily trade alert of BN/Nifty/Finnifty/Midcap options.</li>
+              <li><i class="fas fa-check-circle"></i> Weekly trade alert of Bankex/Sensex/Midcap.</li>
+              <li><i class="fas fa-check-circle"></i> Expiry Special research alerts on every weekly expiry and BTST.</li>
+              <li><i class="fas fa-check-circle"></i> Well-researched targets and stop-loss on every alert.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Premium Package 4: Yearly (New) -->
+          <div class="package-card fade-up">
+            <h3>Premium</h3>
+            <h4>Yearly</h4>
+            <div class="price">₹1,199,990</div>
+            <p class="mb-4 text-sm text-gray-400">Billed annually. Most comprehensive coverage.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Daily trade alert of BN/Nifty/Finnifty/Midcap options.</li>
+              <li><i class="fas fa-check-circle"></i> Weekly trade alert of Bankex/Sensex/Midcap.</li>
+              <li><i class="fas fa-check-circle"></i> Expiry Special research alerts on every weekly expiry and BTST.</li>
+              <li><i class="fas fa-check-circle"></i> Well-researched targets and stop-loss on every alert.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+          
+          <!-- STANDARD TIER HEADER -->
+          <div class="tier-header fade-up" style="margin-top: 5rem;">
+            <h2>Index Options - Standard Tier</h2>
+          </div>
+          
+          <!-- Standard Package 1: Monthly (New) -->
+          <div class="package-card fade-up">
+            <h3>Standard</h3>
+            <h4>Monthly</h4>
+            <div class="price">₹69,999</div>
+            <p class="mb-4 text-sm text-gray-400">Billed monthly. Access to core research alerts.</p>
+            
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Every research alert with target and stop-loss.</li>
+              <li><i class="fas fa-check-circle"></i> Live Market customer support is available.</li>
+              <li><i class="fas fa-check-circle"></i> Get Quality Research Alerts of Bank Nifty/Nifty Option per day.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Standard Package 2: Quarterly (New - Highlight) -->
+          <div class="package-card fade-up highlight">
+            <h3>Standard</h3>
+            <h4>Quarterly</h4>
+            <div class="price">₹149,999</div>
+            <p class="mb-4 text-sm text-gray-400">Billed quarterly. Best value for this tier.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Every research alert with target and stop-loss.</li>
+              <li><i class="fas fa-check-circle"></i> Live Market customer support is available.</li>
+              <li><i class="fas fa-check-circle"></i> Get Quality Research Alerts of Bank Nifty/Nifty Option per day.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Standard Package 3: Half Yearly (New) -->
+          <div class="package-card fade-up">
+            <h3>Standard</h3>
+            <h4>Half Yearly</h4>
+            <div class="price">₹275,000</div>
+            <p class="mb-4 text-sm text-gray-400">Billed semi-annually. Designed for mid-term commitment.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Every research alert with target and stop-loss.</li>
+              <li><i class="fas fa-check-circle"></i> Live Market customer support is available.</li>
+              <li><i class="fas fa-check-circle"></i> Get Quality Research Alerts of Bank Nifty/Nifty Option per day.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+          <!-- Standard Package 4: Yearly (New) -->
+          <div class="package-card fade-up">
+            <h3>Standard</h3>
+            <h4>Yearly</h4>
+            <div class="price">₹500,000</div>
+            <p class="mb-4 text-sm text-gray-400">Billed annually. Long-term cost savings.</p>
+
+            <ul>
+              <li><i class="fas fa-check-circle"></i> One research alert per day through WhatsApp broadcast.</li>
+              <li><i class="fas fa-check-circle"></i> Every research alert with target and stop-loss.</li>
+              <li><i class="fas fa-check-circle"></i> Live Market customer support is available.</li>
+              <li><i class="fas fa-check-circle"></i> Get Quality Research Alerts of Bank Nifty/Nifty Option per day.</li>
+            </ul>
+            <div class="risk-level">Risk Level: <strong>High to Very High</strong></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (Consistent with index.html) -->
+  <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html#home" class="brand mb-20">Grow Geniuss</a>
+            <p class="footer-desc">
+              Empowering Indian traders with institutional-grade data, expert insights, and disciplined risk management strategies.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          
+          <div>
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="packages.html">Packages</a></li>
+              <li><a href="index.html#why-us">Why Us</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Legal</h5>
+            <ul class="footer-links">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Contact Us</h5>
+            <ul class="footer-links">
+              <li><a><i class="fas fa-phone"></i> +91 81690 02642</a></li>
+              <li><a ><i class="fas fa-envelope"></i> info@stockwiseiq.in</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> Stock wise IQ, Sanpada, Thane, Pin: 400705</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          <p><strong>Risk Disclosure:</strong> Investment in securities market are subject to market risks. Read all the related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. The securities quoted are for illustration only and are not recommendatory.</p>
+          <br>
+          <p class="text-center">&copy; <span id="year"></span> Grow Geniuss Financial Services. All rights reserved.</p>
+        </div>
+      </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // 1. Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const navLinkEls = document.querySelectorAll('.nav-links a');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuToggle.querySelector('i').classList.toggle('fa-bars');
+      menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Close menu when a link is clicked (for mobile)
+    navLinkEls.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) {
+          navLinks.classList.remove('open');
+          menuToggle.querySelector('i').classList.remove('fa-times');
+          menuToggle.querySelector('i').classList.add('fa-bars');
+        }
+      });
+    });
+    
+    // 2. Fade-up Animations (Intersection Observer)
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(element => { observer.observe(element); });
+    
+    // 3. Dynamic Year in Footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

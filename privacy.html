@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grow Geniuss | Privacy Policy</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* Custom Styling for Aesthetics */
+    :root {
+      --primary: #4f46e5; /* Indigo-600 */
+      --secondary: #10b981; /* Emerald-500 */
+      --dark: #1f2937; /* Gray-800 */
+      --dark-alt: #111827; /* Gray-900 */
+      --light: #f9fafb; /* Gray-50 */
+    }
+
+    /* Base Styling */
+    html { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--dark-alt); color: var(--light); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .section-spacing { padding: 80px 0; }
+    
+    /* Utility Overrides for Colors */
+    .bg-dark-alt { background-color: var(--dark-alt); }
+    .text-gradient { 
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--dark-alt);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .navbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--light);
+      display: flex;
+      align-items: center;
+    }
+    .brand i { color: var(--secondary); margin-right: 8px; }
+
+    /* Policy Content Specific Styles */
+    .policy-content h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--light);
+    }
+    .policy-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: var(--secondary);
+      border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+      padding-bottom: 5px;
+    }
+    .policy-content p, .policy-content ul {
+      margin-bottom: 15px;
+      line-height: 1.7;
+      color: #ccc;
+      font-weight: 400;
+    }
+    .policy-content strong {
+        color: var(--light);
+        font-weight: 700;
+    }
+    .policy-content ul {
+        list-style: disc;
+        padding-left: 25px;
+    }
+    .policy-content li {
+        margin-bottom: 8px;
+    }
+
+    /* --- FOOTER STYLES (Comprehensive) --- */
+    .footer {
+      background-color: var(--dark);
+      padding: 50px 0 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 50px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .footer-desc {
+      color: #9ca3af;
+      margin-bottom: 20px;
+      max-width: 350px;
+    }
+    .social-links a {
+      color: #9ca3af;
+      font-size: 1.25rem;
+      margin-right: 15px;
+      transition: color 0.2s ease;
+    }
+    .social-links a:hover { color: var(--secondary); }
+    .footer-grid h5 {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 15px;
+      color: var(--light);
+    }
+    .footer-links li a {
+      color: #9ca3af;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .footer-links li a:hover { color: var(--primary); }
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #6b7280; /* Gray-500 */
+      padding-top: 20px;
+    }
+    .disclaimer strong { color: #9ca3af; }
+    .text-center { text-align: center; margin-top: 10px; }
+    /* --- END FOOTER STYLES --- */
+
+    @media (max-width: 1024px) {
+        .policy-content h1 { font-size: 2rem; }
+        .policy-content h3 { font-size: 1.25rem; }
+        .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+        .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="index.html" class="brand">
+                <i class="fas fa-chart-line"></i>
+                Grow Geniuss
+            </a>
+            <!-- Simple Back Link -->
+            <a href="index.html" class="text-primary hover:text-secondary font-semibold">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container section-spacing">
+        <div class="policy-content">
+            <h1 class="text-gradient">Privacy Policy</h1>
+            
+            <p><strong>Last Updated:</strong> December 14, 2025</p>
+
+            <p>
+            <strong>Grow Geniuss</strong> values and respects every individual’s right to privacy. By becoming our customer, we promise to remain loyal to both clients and non-clients and protect the information provided to us.
+            </p>
+            <p>
+            This Privacy Policy of **Grow Geniuss** is applicable to both current and former clients. Below are detailed testimonials of our policy:
+            </p>
+            
+            <h3>1. Information We Collect</h3>
+            <p>We collect information you provide directly to us when you register for an account, subscribe to our services, fill out a contact form, or communicate with us. This includes:</p>
+            <ul>
+                <li><strong>Personal Identifiers:</strong> Name, mobile number, email address.</li>
+                <li><strong>Professional Information:</strong> Trading experience level (beginner, intermediate, professional).</li>
+                <li><strong>Usage Data:</strong> Information about how you access and use our service, such as IP address, browser type, and interaction data.</li>
+            </ul>
+
+            <h3>2. Use of Information</h3>
+            <p>The information provided by you will only be used for the following purposes:</p>
+            <ul>
+                <li>Offering you the specific services that you have subscribed to.</li>
+                <li>Personalizing your experience and acting as your identity with us.</li>
+                <li>Internal record keeping and administrative purposes.</li>
+                <li>Sending you emails, newsletters, contest information, surveys, or details about new services, subject to your communication preferences.</li>
+            </ul>
+            <p>If you make any changes to the information, please inform us via call or email.</p>
+            
+            <h3>3. Confidentiality & Disclosure</h3>
+            <p>
+            The personal information collected is kept confidential and adheres to our privacy policy. We will not sell, rent, or transfer your information without your explicit consent, except under the following circumstances:
+            </p>
+            <ul>
+                <li>If required by law or judicial process to government or regulatory bodies.</li>
+                <li>To third-party service providers who help us operate our business (e.g., email service providers, payment processors), provided they agree to maintain confidentiality.</li>
+            </ul>
+            
+            <h3>4. Consent & Communication</h3>
+            <p>
+            By registering your mobile number with **Grow Geniuss**, you consent to be contacted or receive SMS, even if your number is on the National Do Not Disturb (DND) registry. You also agree to comply with our Privacy Policy and Terms & Conditions.
+            </p>
+            <p>
+            In case of changes to your contact information, please notify us via call or email.
+            </p>
+            
+            <h3>5. Acceptance</h3>
+            <p>
+            By accessing or subscribing to our services, you confirm that you have read, understood, and agreed to the terms of this Privacy Policy and our Terms of Use.
+            </p>
+            <p class="mt-8">For any privacy-related concerns or queries, please contact us at privacy@growgenius.in.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER (Full Structure) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a href="index.html" class="brand mb-20">Grow Geniuss</a>
+            <p class="footer-desc">
+              Empowering Indian traders with institutional-grade data, expert insights, and disciplined risk management strategies.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          
+          <div>
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#why-us">Why Us</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Legal</h5>
+            <ul class="footer-links">
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Contact Us</h5>
+            <ul class="footer-links">
+              <li><a ><i class="fas fa-phone"></i> +91 81690 02642</a></li>
+              <li><a ><i class="fas fa-envelope"></i> info@stockwiseiq.in</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> Stock wise IQ, Sanpada, Thane, Pin: 400705</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          <p><strong>Risk Disclosure:</strong> Investment in securities market are subject to market risks. Read all the related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. The securities quoted are for illustration only and are not recommendatory.</p>
+          <br>
+          <p class="text-center">&copy; <span id="year"></span> Grow Geniuss Financial Services. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

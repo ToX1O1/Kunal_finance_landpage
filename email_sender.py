@@ -5,17 +5,29 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
 import fastapi
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
 # NOTE: For security reasons, sensitive information like credentials
 # MUST be loaded from secure environment variables or a configuration service
 # and NEVER stored directly in code.
 
 # --- CONFIGURATION FOR GMAIL SMTP ---
 # Use an "App Password" from your Google Account settings, NOT your main password.
-SMTP_SERVER = "smtp.gmail.com" 
-SMTP_PORT = 465  # Use 465 for SSL/TLS
-SENDER_EMAIL = "your.standard.gmail@gmail.com" # <-- Replace with your actual sending Gmail address
-SENDER_PASSWORD = "YOUR_GMAIL_APP_PASSWORD"  # <-- Replace with your generated App Password
-TARGET_EMAIL = "support@growgenius.in" # The recipient email address
+# SMTP_SERVER = "smtp.gmail.com" 
+# SMTP_PORT = 465  # Use 465 for SSL/TLS
+# SENDER_EMAIL = "your.standard.gmail@gmail.com" # <-- Replace with your actual sending Gmail address
+# SENDER_PASSWORD = "YOUR_GMAIL_APP_PASSWORD"  # <-- Replace with your generated App Password
+# TARGET_EMAIL = "support@growgenius.in" # The recipient email address
+
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT = int(os.getenv("SMTP_PORT"))
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
+TARGET_EMAIL = os.getenv("TARGET_EMAIL")
 
 # --- CORE FUNCTION ---
 

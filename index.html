@@ -224,14 +224,14 @@
             <i class="fas fa-envelope"></i>
             <div>
               <h5>Email Us</h5>
-              <p>support@growgenius.in<br>sales@growgenius.in</p>
+              <p>support@growgeniuss.in<br>sales@growgeniuss.in</p>
             </div>
           </div>
           <div class="contact-card">
             <i class="fas fa-phone-alt"></i>
             <div>
               <h5>Call Us</h5>
-              <p>+91 98765 43210<br>Mon-Fri, 9am - 6pm</p>
+              <p>+91 98765 43210<br>Mon-Sat, 9am - 6pm</p>
             </div>
           </div>
         </div>
@@ -244,6 +244,11 @@
           <div class="form-group">
             <label>Email</label>
             <input type="email" class="form-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="contactPhone" class="form-input" placeholder="Mobile Number (e.g. +91 98765 43210)" required aria-describedby="contactPhoneError">
+            <small id="contactPhoneError" class="input-error" aria-live="polite" style="display:block;margin-top:6px;font-size:0.85rem;color:#e74c3c;"></small>
           </div>
           <div class="form-group">
             <label>Message</label>
@@ -288,6 +293,7 @@
             <ul class="footer-links">
               <li><a href="#home">Home</a></li>
               <li><a href="#features">Features</a></li>
+              <li><a href="packages.html">Packages</a></li>
               <li><a href="#why-us">Why Us</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -307,8 +313,8 @@
             <h5>Contact Us</h5>
             <ul class="footer-links">
               <li><a><i class="fas fa-phone"></i> +91 81690 02642</a></li>
-              <li><a ><i class="fas fa-envelope"></i> info@stockwiseiq.in</a></li>
-              <li><a ><i class="fas fa-map-marker-alt"></i> Stock wise IQ, Sanpada, Thane, Pin: 400705</a></li>
+              <li><a ><i class="fas fa-envelope"></i> info@growgeniuss.in</a></li>
+              <li><a ><i class="fas fa-map-marker-alt"></i> Grow Geniuss, Sanpada, Thane, Pin: 400705</a></li>
               <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
             </ul>
           </div>
@@ -339,7 +345,8 @@
           <input type="text" class="form-input" placeholder="Full Name" required>
         </div>
         <div class="form-group">
-          <input type="tel" class="form-input" placeholder="Mobile Number" required>
+          <input type="tel" id="phoneInput" class="form-input" placeholder="Mobile Number (e.g. +91 98765 43210)" required aria-describedby="phoneError">
+          <small id="phoneError" class="input-error" aria-live="polite" style="display:block;margin-top:6px;font-size:0.85rem;color:#e74c3c;"></small>
         </div>
         <div class="form-group">
           <input type="email" class="form-input" placeholder="Email Address" required>
@@ -403,22 +410,196 @@
     function closeModal() {
       modal.classList.remove('open');
       document.body.style.overflow = ''; // Restore scrolling
-    }
 
+      // Clear form and validation UI when modal is closed
+      const phoneError = document.getElementById('phoneError');
+      if (leadForm) {
+        leadForm.reset();
+      }
+      if (phoneError) {
+        phoneError.textContent = '';
+        phoneError.style.color = '#e74c3c';
+      }
+      if (phoneInput) {
+        phoneInput.classList.remove('invalid', 'valid');
+      }
+    }
+    
     modalClose.addEventListener('click', closeModal);
     modalBackdrop.addEventListener('click', closeModal);
     
     // Prevent form submission (for demo purposes)
     const leadForm = document.getElementById('leadForm');
+    const phoneInput = document.getElementById('phoneInput');
+
+    // Reusable helpers for Indian mobile validation
+    function normalizeDigits(raw) {
+      return (raw || '').replace(/\D/g, '');
+    }
+    
+    function validateIndianMobileRaw(raw) {
+      const digits = normalizeDigits(raw);
+      if (!digits) return { valid: false, reason: 'empty' };
+      // Accept exact 10-digit local number starting 6-9
+      if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
+      // Accept 0 + 10-digit (0XXXXXXXXXX)
+      if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
+      // Accept country code 91 + 10-digit (91XXXXXXXXXX)
+      if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
+      // Reject other lengths (including arbitrary 11-digit numbers without 0/91 prefix)
+      return { valid: false, reason: 'format' };
+    }
+
+    // Contact form phone elements
+    const contactForm = document.getElementById('contactForm');
+    const contactPhone = document.getElementById('contactPhone');
+    const contactPhoneError = document.getElementById('contactPhoneError');
+
+    // Real-time validation for contact phone
+    if (contactPhone) {
+      contactPhone.addEventListener('input', () => {
+        const raw = contactPhone.value || '';
+        const digits = normalizeDigits(raw);
+
+        if (!raw.trim()) {
+          contactPhoneError.textContent = '';
+          contactPhone.classList.remove('invalid', 'valid');
+          return;
+        }
+        if (/[A-Za-z]/.test(raw)) {
+          contactPhoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
+          contactPhone.classList.add('invalid');
+          contactPhone.classList.remove('valid');
+          contactPhoneError.style.color = '#e74c3c';
+          return;
+        }
+        if (digits.length < 10) {
+          contactPhoneError.textContent = 'Enter at least 10 digits.';
+          contactPhone.classList.add('invalid');
+          contactPhone.classList.remove('valid');
+          contactPhoneError.style.color = '#e74c3c';
+          return;
+        }
+
+        const res = validateIndianMobileRaw(raw);
+        if (res.valid) {
+          contactPhoneError.textContent = 'Valid Indian mobile number.';
+          contactPhoneError.style.color = '#2ecc71';
+          contactPhone.classList.add('valid');
+          contactPhone.classList.remove('invalid');
+        } else {
+          contactPhoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
+          contactPhoneError.style.color = '#e74c3c';
+          contactPhone.classList.add('invalid');
+          contactPhone.classList.remove('valid');
+        }
+      });
+    }
+
+    // Real-time validation for modal phone (keeps existing behavior)
+    if (phoneInput) {
+      const phoneError = document.getElementById('phoneError');
+      phoneInput.addEventListener('input', () => {
+        const raw = phoneInput.value || '';
+        const digits = normalizeDigits(raw);
+ 
+        // Clear state when empty
+        if (!raw.trim()) {
+          phoneError.textContent = '';
+          phoneError.style.color = '#e74c3c';
+          phoneInput.classList.remove('invalid', 'valid');
+          return;
+        }
+ 
+        // Disallow letters explicitly (avoid accepting alpha characters)
+        if (/[A-Za-z]/.test(raw)) {
+          phoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
+          phoneError.style.color = '#e74c3c';
+          phoneInput.classList.add('invalid');
+          phoneInput.classList.remove('valid');
+          return;
+        }
+ 
+        if (digits.length < 10) {
+          phoneError.textContent = 'Enter at least 10 digits.';
+          phoneError.style.color = '#e74c3c';
+          phoneInput.classList.add('invalid');
+          phoneInput.classList.remove('valid');
+          return;
+        }
+ 
+        const result = validateIndianMobileRaw(raw);
+        if (result.valid) {
+          phoneError.textContent = 'Valid Indian mobile number.';
+          phoneError.style.color = '#2ecc71';
+          phoneInput.classList.add('valid');
+          phoneInput.classList.remove('invalid');
+        } else {
+          phoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
+          phoneError.style.color = '#e74c3c';
+          phoneInput.classList.add('invalid');
+          phoneInput.classList.remove('valid');
+        }
+      });
+    }
+ 
     if (leadForm) {
       leadForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        // Here you would typically send data to a server
-        console.log('Lead form submitted (demo)');
+ 
+        // Validate Indian mobile number for modal
+        const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+        const validation = (function(raw) {
+          const digits = (raw || '').replace(/\D/g, '');
+          if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
+          if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
+          if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
+          return { valid: false };
+        })(phoneVal);
+ 
+        if (!validation.valid) {
+          alert('Please enter a valid Indian mobile number. Acceptable formats: 9876543210, 09876543210, +91 9876543210');
+          if (phoneInput) phoneInput.focus();
+          return;
+        }
+ 
+        // Demo: mask number when logging
+        const masked = '****' + validation.normalized.slice(-4);
+        console.log('Lead form submitted (demo). Phone:', masked);
+ 
+        // Clear form fields after successful submit
+        if (leadForm) leadForm.reset();
+        const phoneError = document.getElementById('phoneError');
+        if (phoneError) phoneError.textContent = '';
+        if (phoneInput) phoneInput.classList.remove('invalid', 'valid');
+ 
         closeModal();
       });
     }
     
+    // Contact form submit handling with phone validation + clearing fields
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (contactPhone) {
+          const v = validateIndianMobileRaw(contactPhone.value || '');
+          if (!v.valid) {
+            alert('Please enter a valid Indian mobile number in contact form. Formats allowed: 9876543210, 09876543210, +91 9876543210');
+            contactPhone.focus();
+            return;
+          }
+        }
+        // Demo: normally send data here
+        console.log('Contact form submitted (demo).');
+
+        // Clear contact form + ui
+        contactForm.reset();
+        if (contactPhoneError) contactPhoneError.textContent = '';
+        if (contactPhone) contactPhone.classList.remove('invalid', 'valid');
+        // Optionally show a success message (simple alert for demo)
+        alert('Message sent (demo). We will get back to you soon.');
+      });
+    }
     // 3. Smooth Scroll Navigation (Fix for Why Us tab dash)
     navLinkEls.forEach(link => {
         link.addEventListener('click', function(e) {

@@ -21,7 +21,7 @@ load_dotenv()
 # SMTP_PORT = 465  # Use 465 for SSL/TLS
 # SENDER_EMAIL = "your.standard.gmail@gmail.com" # <-- Replace with your actual sending Gmail address
 # SENDER_PASSWORD = "YOUR_GMAIL_APP_PASSWORD"  # <-- Replace with your generated App Password
-# TARGET_EMAIL = "support@growgenius.in" # The recipient email address
+# TARGET_EMAIL = "support@growgeniuss.in" # The recipient email address
 
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = int(os.getenv("SMTP_PORT"))

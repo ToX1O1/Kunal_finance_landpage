@@ -4,9 +4,12 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
-import fastapi
 from dotenv import load_dotenv
 import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import uvicorn
 
 load_dotenv()
 
@@ -21,7 +24,7 @@ load_dotenv()
 # SMTP_PORT = 465  # Use 465 for SSL/TLS
 # SENDER_EMAIL = "your.standard.gmail@gmail.com" # <-- Replace with your actual sending Gmail address
 # SENDER_PASSWORD = "YOUR_GMAIL_APP_PASSWORD"  # <-- Replace with your generated App Password
-# TARGET_EMAIL = "support@growgeniuss.in" # The recipient email address
+# TARGET_EMAIL = "aj2524113@gmail.com" # The recipient email address
 
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = int(os.getenv("SMTP_PORT"))
@@ -99,36 +102,35 @@ def send_mail(
 
 # --- EXAMPLE USAGE (For testing the function separately) ---
 
-if __name__ == '__main__':
-    # 1. Example data from the "Join Us" form (Lead Form)
-    lead_data = {
-        "name": "Arjun Sharma",
-        "phone": "9988776655",
-        "email": "arjun.sharma@example.com",
-        "experience": "intermediate"
-    }
-    
-    print("--- Testing Lead Form Submission ---")
-    lead_success = send_mail(
-        target_email=TARGET_EMAIL,
-        subject="New Join Us Lead",
-        source="Join Us",
-        form_data=lead_data
-    )
-    print(f"Lead Mail Status: {'Sent' if lead_success else 'Failed'}\n")
-    
-    # 2. Example data from the "Contact" form
-    contact_data = {
-        "name": "Priya Singh",
-        "email": "priya.singh@query.com",
-        "message": "I have a question about the 'Real-time Analytics' feature and pricing for the Pro plan."
-    }
+class MailRequest(BaseModel):
+    target_email: str = TARGET_EMAIL
+    subject: str
+    source: str
+    form_data: Dict[str, Any]
 
-    print("--- Testing Contact Form Submission ---")
-    contact_success = send_mail(
-        target_email=TARGET_EMAIL,
-        subject="New Customer Query",
-        source="Contact",
-        form_data=contact_data
+app = FastAPI()
+# allow local frontend to call the API while developing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.post("/api/send-mail")
+def api_send_mail(req: MailRequest):
+    """
+    Accepts JSON and forwards to send_mail(). Returns success: true/false.
+    """
+    success = send_mail(
+        target_email= TARGET_EMAIL,
+        subject=req.subject,
+        source=req.source,
+        form_data=req.form_data
     )
-    print(f"Contact Mail Status: {'Sent' if contact_success else 'Failed'}")
+    return {"success": success}
+
+if __name__ == "__main__":
+    # Start server for local development
+    uvicorn.run(app, host="0.0.0.0", port=8000)

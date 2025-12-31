@@ -370,395 +370,459 @@
   <!-- SCRIPTS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <script>
-    // --- Existing script.js content integrated here for a single-file solution ---
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        // --- Existing script.js content integrated here for a single-file solution ---
 
-    // 1. Mobile Menu Toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const navLinkEls = document.querySelectorAll('.nav-link');
+        // 1. Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        const navLinkEls = document.querySelectorAll('.nav-link');
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      menuToggle.querySelector('i').classList.toggle('fa-bars');
-      menuToggle.querySelector('i').classList.toggle('fa-times');
-    });
+        menuToggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          menuToggle.querySelector('i').classList.toggle('fa-bars');
+          menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
 
-    // Close menu when a link is clicked (for mobile)
-    navLinkEls.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navLinks.classList.contains('open')) {
-          navLinks.classList.remove('open');
-          menuToggle.querySelector('i').classList.remove('fa-times');
-          menuToggle.querySelector('i').classList.add('fa-bars');
-        }
-      });
-    });
+        // Close menu when a link is clicked (for mobile)
+        navLinkEls.forEach(link => {
+          link.addEventListener('click', () => {
+            if (navLinks.classList.contains('open')) {
+              navLinks.classList.remove('open');
+              menuToggle.querySelector('i').classList.remove('fa-times');
+              menuToggle.querySelector('i').classList.add('fa-bars');
+            }
+          });
+        });
 
-    // 2. Modal Logic
-    const modal = document.getElementById('leadModal');
-    const modalTriggers = document.querySelectorAll('.modal-trigger');
-    const modalClose = document.querySelector('.modal-close');
-    const modalBackdrop = document.querySelector('.modal-backdrop');
+        // 2. Modal Logic
+        const modal = document.getElementById('leadModal');
+        const modalTriggers = document.querySelectorAll('.modal-trigger');
+        const modalClose = document.querySelector('.modal-close');
+        const modalBackdrop = document.querySelector('.modal-backdrop');
 
-    modalTriggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
-      });
-    });
+        modalTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+          });
+        });
 
-    function closeModal() {
-      modal.classList.remove('open');
-      document.body.style.overflow = ''; // Restore scrolling
+        function closeModal() {
+          modal.classList.remove('open');
+          document.body.style.overflow = ''; // Restore scrolling
 
-      // Clear form and validation UI when modal is closed
-      const phoneError = document.getElementById('phoneError');
-      if (leadForm) {
-        leadForm.reset();
-      }
-      if (phoneError) {
-        phoneError.textContent = '';
-        phoneError.style.color = '#e74c3c';
-      }
-      if (phoneInput) {
-        phoneInput.classList.remove('invalid', 'valid');
-      }
-    }
-    
-    modalClose.addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', closeModal);
-    
-    // Prevent form submission (for demo purposes)
-    const leadForm = document.getElementById('leadForm');
-    const phoneInput = document.getElementById('phoneInput');
-
-    // Reusable helpers for Indian mobile validation
-    function normalizeDigits(raw) {
-      return (raw || '').replace(/\D/g, '');
-    }
-    
-    function validateIndianMobileRaw(raw) {
-      const digits = normalizeDigits(raw);
-      if (!digits) return { valid: false, reason: 'empty' };
-      // Accept exact 10-digit local number starting 6-9
-      if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
-      // Accept 0 + 10-digit (0XXXXXXXXXX)
-      if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
-      // Accept country code 91 + 10-digit (91XXXXXXXXXX)
-      if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
-      // Reject other lengths (including arbitrary 11-digit numbers without 0/91 prefix)
-      return { valid: false, reason: 'format' };
-    }
-
-    // Contact form phone elements
-    const contactForm = document.getElementById('contactForm');
-    const contactPhone = document.getElementById('contactPhone');
-    const contactPhoneError = document.getElementById('contactPhoneError');
-
-    // Real-time validation for contact phone
-    if (contactPhone) {
-      contactPhone.addEventListener('input', () => {
-        const raw = contactPhone.value || '';
-        const digits = normalizeDigits(raw);
-
-        if (!raw.trim()) {
-          contactPhoneError.textContent = '';
-          contactPhone.classList.remove('invalid', 'valid');
-          return;
-        }
-        if (/[A-Za-z]/.test(raw)) {
-          contactPhoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
-          contactPhone.classList.add('invalid');
-          contactPhone.classList.remove('valid');
-          contactPhoneError.style.color = '#e74c3c';
-          return;
-        }
-        if (digits.length < 10) {
-          contactPhoneError.textContent = 'Enter at least 10 digits.';
-          contactPhone.classList.add('invalid');
-          contactPhone.classList.remove('valid');
-          contactPhoneError.style.color = '#e74c3c';
-          return;
-        }
-
-        const res = validateIndianMobileRaw(raw);
-        if (res.valid) {
-          contactPhoneError.textContent = 'Valid Indian mobile number.';
-          contactPhoneError.style.color = '#2ecc71';
-          contactPhone.classList.add('valid');
-          contactPhone.classList.remove('invalid');
-        } else {
-          contactPhoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
-          contactPhoneError.style.color = '#e74c3c';
-          contactPhone.classList.add('invalid');
-          contactPhone.classList.remove('valid');
-        }
-      });
-    }
-
-    // Real-time validation for modal phone (keeps existing behavior)
-    if (phoneInput) {
-      const phoneError = document.getElementById('phoneError');
-      phoneInput.addEventListener('input', () => {
-        const raw = phoneInput.value || '';
-        const digits = normalizeDigits(raw);
- 
-        // Clear state when empty
-        if (!raw.trim()) {
-          phoneError.textContent = '';
-          phoneError.style.color = '#e74c3c';
-          phoneInput.classList.remove('invalid', 'valid');
-          return;
-        }
- 
-        // Disallow letters explicitly (avoid accepting alpha characters)
-        if (/[A-Za-z]/.test(raw)) {
-          phoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
-          phoneError.style.color = '#e74c3c';
-          phoneInput.classList.add('invalid');
-          phoneInput.classList.remove('valid');
-          return;
-        }
- 
-        if (digits.length < 10) {
-          phoneError.textContent = 'Enter at least 10 digits.';
-          phoneError.style.color = '#e74c3c';
-          phoneInput.classList.add('invalid');
-          phoneInput.classList.remove('valid');
-          return;
-        }
- 
-        const result = validateIndianMobileRaw(raw);
-        if (result.valid) {
-          phoneError.textContent = 'Valid Indian mobile number.';
-          phoneError.style.color = '#2ecc71';
-          phoneInput.classList.add('valid');
-          phoneInput.classList.remove('invalid');
-        } else {
-          phoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
-          phoneError.style.color = '#e74c3c';
-          phoneInput.classList.add('invalid');
-          phoneInput.classList.remove('valid');
-        }
-      });
-    }
- 
-    if (leadForm) {
-      leadForm.addEventListener('submit', (e) => {
-        e.preventDefault();
- 
-        // Validate Indian mobile number for modal
-        const phoneVal = phoneInput ? phoneInput.value.trim() : '';
-        const validation = (function(raw) {
-          const digits = (raw || '').replace(/\D/g, '');
-          if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
-          if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
-          if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
-          return { valid: false };
-        })(phoneVal);
- 
-        if (!validation.valid) {
-          alert('Please enter a valid Indian mobile number. Acceptable formats: 9876543210, 09876543210, +91 9876543210');
-          if (phoneInput) phoneInput.focus();
-          return;
-        }
- 
-        // Demo: mask number when logging
-        const masked = '****' + validation.normalized.slice(-4);
-        console.log('Lead form submitted (demo). Phone:', masked);
- 
-        // Clear form fields after successful submit
-        if (leadForm) leadForm.reset();
-        const phoneError = document.getElementById('phoneError');
-        if (phoneError) phoneError.textContent = '';
-        if (phoneInput) phoneInput.classList.remove('invalid', 'valid');
- 
-        closeModal();
-      });
-    }
-    
-    // Contact form submit handling with phone validation + clearing fields
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (contactPhone) {
-          const v = validateIndianMobileRaw(contactPhone.value || '');
-          if (!v.valid) {
-            alert('Please enter a valid Indian mobile number in contact form. Formats allowed: 9876543210, 09876543210, +91 9876543210');
-            contactPhone.focus();
-            return;
+          // Clear form and validation UI when modal is closed
+          const phoneError = document.getElementById('phoneError');
+          if (leadForm) {
+            leadForm.reset();
+          }
+          if (phoneError) {
+            phoneError.textContent = '';
+            phoneError.style.color = '#e74c3c';
+          }
+          if (phoneInput) {
+            phoneInput.classList.remove('invalid', 'valid');
           }
         }
-        // Demo: normally send data here
-        console.log('Contact form submitted (demo).');
+        
+        modalClose.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        
+        // Prevent form submission (for demo purposes)
+        const leadForm = document.getElementById('leadForm');
+        const phoneInput = document.getElementById('phoneInput');
 
-        // Clear contact form + ui
-        contactForm.reset();
-        if (contactPhoneError) contactPhoneError.textContent = '';
-        if (contactPhone) contactPhone.classList.remove('invalid', 'valid');
-        // Optionally show a success message (simple alert for demo)
-        alert('Message sent (demo). We will get back to you soon.');
-      });
-    }
-    // 3. Smooth Scroll Navigation (Fix for Why Us tab dash)
-    navLinkEls.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Manually set the active class immediately on click
-            navLinkEls.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+        // Reusable helpers for Indian mobile validation
+        function normalizeDigits(raw) {
+          return (raw || '').replace(/\D/g, '');
+        }
+        
+        function validateIndianMobileRaw(raw) {
+          const digits = normalizeDigits(raw);
+          if (!digits) return { valid: false, reason: 'empty' };
+          // Accept exact 10-digit local number starting 6-9
+          if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
+          // Accept 0 + 10-digit (0XXXXXXXXXX)
+          if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
+          // Accept country code 91 + 10-digit (91XXXXXXXXXX)
+          if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
+          // Reject other lengths (including arbitrary 11-digit numbers without 0/91 prefix)
+          return { valid: false, reason: 'format' };
+        }
 
-            const href = this.getAttribute('href');
+        // Contact form phone elements
+        const contactForm = document.getElementById('contactForm');
+        const contactPhone = document.getElementById('contactPhone');
+        const contactPhoneError = document.getElementById('contactPhoneError');
 
-            // Only intercept internal hash links — allow normal navigation for pages (e.g. packages.html)
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
+        // Real-time validation for contact phone
+        if (contactPhone) {
+          contactPhone.addEventListener('input', () => {
+            const raw = contactPhone.value || '';
+            const digits = normalizeDigits(raw);
+
+            if (!raw.trim()) {
+              contactPhoneError.textContent = '';
+              contactPhone.classList.remove('invalid', 'valid');
+              return;
             }
-            // else: do nothing so browser follows the link to another page
+            if (/[A-Za-z]/.test(raw)) {
+              contactPhoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
+              contactPhone.classList.add('invalid');
+              contactPhone.classList.remove('valid');
+              contactPhoneError.style.color = '#e74c3c';
+              return;
+            }
+            if (digits.length < 10) {
+              contactPhoneError.textContent = 'Enter at least 10 digits.';
+              contactPhone.classList.add('invalid');
+              contactPhone.classList.remove('valid');
+              contactPhoneError.style.color = '#e74c3c';
+              return;
+            }
+
+            const res = validateIndianMobileRaw(raw);
+            if (res.valid) {
+              contactPhoneError.textContent = 'Valid Indian mobile number.';
+              contactPhoneError.style.color = '#2ecc71';
+              contactPhone.classList.add('valid');
+              contactPhone.classList.remove('invalid');
+            } else {
+              contactPhoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
+              contactPhoneError.style.color = '#e74c3c';
+              contactPhone.classList.add('invalid');
+              contactPhone.classList.remove('valid');
+            }
+          });
+        }
+
+        // Real-time validation for modal phone (keeps existing behavior)
+        if (phoneInput) {
+          const phoneError = document.getElementById('phoneError');
+          phoneInput.addEventListener('input', () => {
+            const raw = phoneInput.value || '';
+            const digits = normalizeDigits(raw);
+ 
+            // Clear state when empty
+            if (!raw.trim()) {
+              phoneError.textContent = '';
+              phoneError.style.color = '#e74c3c';
+              phoneInput.classList.remove('invalid', 'valid');
+              return;
+            }
+ 
+            // Disallow letters explicitly (avoid accepting alpha characters)
+            if (/[A-Za-z]/.test(raw)) {
+              phoneError.textContent = 'Only digits and optional +, spaces or - are allowed.';
+              phoneError.style.color = '#e74c3c';
+              phoneInput.classList.add('invalid');
+              phoneInput.classList.remove('valid');
+              return;
+            }
+ 
+            if (digits.length < 10) {
+              phoneError.textContent = 'Enter at least 10 digits.';
+              phoneError.style.color = '#e74c3c';
+              phoneInput.classList.add('invalid');
+              phoneInput.classList.remove('valid');
+              return;
+            }
+ 
+            const result = validateIndianMobileRaw(raw);
+            if (result.valid) {
+              phoneError.textContent = 'Valid Indian mobile number.';
+              phoneError.style.color = '#2ecc71';
+              phoneInput.classList.add('valid');
+              phoneInput.classList.remove('invalid');
+            } else {
+              phoneError.textContent = 'Invalid number — enter a 10-digit Indian mobile (optionally prefixed with 0 or 91).';
+              phoneError.style.color = '#e74c3c';
+              phoneInput.classList.add('invalid');
+              phoneInput.classList.remove('valid');
+            }
+          });
+        }
+ 
+        if (leadForm) {
+          leadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validation (same as before)
+            const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+            const validation = (function(raw) {
+              const digits = (raw || '').replace(/\D/g, '');
+              if (/^[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits };
+              if (/^0[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(1) };
+              if (/^91[6-9]\d{9}$/.test(digits)) return { valid: true, normalized: digits.slice(2) };
+              return { valid: false };
+            })(phoneVal);
+
+            if (!validation.valid) {
+              alert('Please enter a valid Indian mobile number. Acceptable formats: 9876543210, 09876543210, +91 9876543210');
+              if (phoneInput) phoneInput.focus();
+              return;
+            }
+
+            // Build payload from modal inputs
+            const name = (leadForm.querySelector('input[type="text"]') || {}).value || '';
+            const email = (leadForm.querySelector('input[type="email"]') || {}).value || '';
+            const experience = (leadForm.querySelector('select') || {}).value || '';
+
+            const payload = {
+              target_email: 'support@growgeniuss.in',
+              subject: 'New Join Us Lead',
+              source: 'Join Us',
+              form_data: {
+                name,
+                phone: validation.normalized,
+                email,
+                experience
+              }
+            };
+
+            try {
+              const res = await fetch('http://localhost:8000/api/send-mail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              const data = await res.json();
+              if (data.success) {
+                alert('Lead submitted. Thank you!');
+                leadForm.reset();
+                closeModal();
+              } else {
+                alert('Failed to send lead. Try again later.');
+              }
+            } catch (err) {
+              console.error('Error sending lead:', err);
+              alert('Network error. Could not send lead.');
+            }
+          });
+        }
+ 
+        // Contact form submit handling with phone validation + clearing fields
+        if (contactForm) {
+          contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (contactPhone) {
+              const v = validateIndianMobileRaw(contactPhone.value || '');
+              if (!v.valid) {
+                alert('Please enter a valid Indian mobile number in contact form. Formats allowed: 9876543210, 09876543210, +91 9876543210');
+                contactPhone.focus();
+                return;
+              }
+            }
+
+            const name = (contactForm.querySelector('input[type="text"]') || {}).value || '';
+            const email = (contactForm.querySelector('input[type="email"]') || {}).value || '';
+            const phone = contactPhone ? (contactPhone.value || '') : '';
+            const message = (contactForm.querySelector('textarea') || {}).value || '';
+
+            const payload = {
+              target_email: 'support@growgeniuss.in',
+              subject: 'New Contact Message',
+              source: 'Contact',
+              form_data: { name, email, phone, message }
+            };
+
+            try {
+              const res = await fetch('http://localhost:8000/api/send-mail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              const data = await res.json();
+              if (data.success) {
+                alert('Message sent. We will get back to you soon.');
+                contactForm.reset();
+                if (contactPhoneError) contactPhoneError.textContent = '';
+                if (contactPhone) contactPhone.classList.remove('invalid', 'valid');
+              } else {
+                alert('Failed to send message. Try again later.');
+              }
+            } catch (err) {
+              console.error('Error sending contact message:', err);
+              alert('Network error. Could not send message.');
+            }
+          });
+        }
+        // ...existing code...
+ 
+        // 3. Smooth Scroll Navigation (Fix for Why Us tab dash)
+        navLinkEls.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Manually set the active class immediately on click
+                navLinkEls.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                const href = this.getAttribute('href');
+
+                // Only intercept internal hash links — allow normal navigation for pages (e.g. packages.html)
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                // else: do nothing so browser follows the link to another page
+            });
         });
-    });
 
-    // 4. Scroll Spy for Highlighting Active Link
-    const sections = document.querySelectorAll('section');
-    const navBar = document.querySelector('.navbar');
+        // 4. Scroll Spy for Highlighting Active Link
+        const sections = document.querySelectorAll('section');
+        const navBar = document.querySelector('.navbar');
 
-    function scrollSpy() {
-      let current = '';
-      const navHeight = navBar.offsetHeight;
+        function scrollSpy() {
+          let current = '';
+          const navHeight = navBar.offsetHeight;
 
-      // Determine the section currently in view
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - navHeight - 1; // Adjust for navbar height
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
+          // Determine the section currently in view
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop - navHeight - 1; // Adjust for navbar height
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          // Highlight the corresponding navigation link
+          navLinkEls.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+              link.classList.add('active');
+            }
+          });
         }
-      });
 
-      // Highlight the corresponding navigation link
-      navLinkEls.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-          link.classList.add('active');
+        window.addEventListener('scroll', scrollSpy);
+        window.addEventListener('load', scrollSpy); // Run on load to set initial state
+
+        // 5. Header Stickiness (optional but often expected)
+        function checkHeaderStickiness() {
+            if (window.pageYOffset > 50) {
+                navBar.classList.add('sticky');
+            } else {
+                navBar.classList.remove('sticky');
+            }
         }
-      });
-    }
+        window.addEventListener('scroll', checkHeaderStickiness);
+        window.addEventListener('load', checkHeaderStickiness);
 
-    window.addEventListener('scroll', scrollSpy);
-    window.addEventListener('load', scrollSpy); // Run on load to set initial state
-
-    // 5. Header Stickiness (optional but often expected)
-    function checkHeaderStickiness() {
-        if (window.pageYOffset > 50) {
-            navBar.classList.add('sticky');
-        } else {
-            navBar.classList.remove('sticky');
-        }
-    }
-    window.addEventListener('scroll', checkHeaderStickiness);
-    window.addEventListener('load', checkHeaderStickiness);
-
-    // 6. Fade-up Animations (Intersection Observer)
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Stop observing once visible
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-up').forEach(element => {
-      observer.observe(element);
-    });
-
-    // 7. Dynamic Year in Footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 8. Demo Chart.js Initialization
-    function initializeChart() {
-        const ctx = document.getElementById('heroChart');
-        if (!ctx) return;
-
-        const data = {
-            labels: ['9:15', '10:00', '10:45', '11:30', '12:15', '1:00', '1:45', '2:30', '3:30'],
-            datasets: [{
-                label: 'BANKNIFTY',
-                data: [47000, 47100, 47050, 47250, 47300, 47200, 47400, 47550, 47500],
-                borderColor: '#1e90ff', // A strong blue color
-                backgroundColor: 'rgba(30, 144, 255, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointHoverRadius: 5,
-                borderWidth: 3,
-                pointBackgroundColor: '#1e90ff',
-            }]
+        // 6. Fade-up Animations (Intersection Observer)
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
         };
 
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            title: (tooltipItems) => {
-                                return `Time: ${tooltipItems[0].label}`;
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target); // Stop observing once visible
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(element => {
+          observer.observe(element);
+        });
+
+        // 7. Dynamic Year in Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 8. Demo Chart.js Initialization
+        function initializeChart() {
+            const ctx = document.getElementById('heroChart');
+            if (!ctx) return;
+
+            const data = {
+                labels: ['9:15', '10:00', '10:45', '11:30', '12:15', '1:00', '1:45', '2:30', '3:30'],
+                datasets: [{
+                    label: 'BANKNIFTY',
+                    data: [47000, 47100, 47050, 47250, 47300, 47200, 47400, 47550, 47500],
+                    borderColor: '#1e90ff', // A strong blue color
+                    backgroundColor: 'rgba(30, 144, 255, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#1e90ff',
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                title: (tooltipItems) => {
+                                    return `Time: ${tooltipItems[0].label}`;
+                                },
+                                label: (context) => {
+                                    return `Price: ${context.formattedValue}`;
+                                }
+                            } // <-- callbacks closed
+                        } // <-- tooltip closed
+                    }, // <-- plugins closed
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                borderColor: '#3c4043'
                             },
-                            label: (context) => {
-                                return `Price: ${context.formattedValue}`;
+                            ticks: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#3c4043',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#e0e0e0'
                             }
                         }
                     }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false,
-                            borderColor: '#3c4043'
-                        },
-                        ticks: {
-                            color: '#e0e0e0'
-                        }
-                    },
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: '#3c4043',
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: '#e0e0e0'
-                        }
-                    }
                 }
-            }
-        };
-
-        new Chart(ctx, config);
-    }
-    
-    // Initializing the chart on window load
-    window.addEventListener('load', initializeChart);
-
-    // --- End of script.js content ---
+            };
+            
+            new Chart(ctx, config);
+        }
+        
+        // Initializing the chart on window load
+        window.addEventListener('load', initializeChart);
+      } catch (err) {
+        // Prevent script errors from leaving a blank page. Open DevTools to inspect.
+        // On Windows: press Ctrl+Shift+I then check Console.
+        console.error('Script initialization failed:', err);
+        // optionally show a small visible error so page isn't blank
+        const body = document.body;
+        if (body && !document.getElementById('script-error-banner')) {
+          const banner = document.createElement('div');
+          banner.id = 'script-error-banner';
+          banner.textContent = 'An error occurred initializing the page. Check console (Ctrl+Shift+I).';
+          banner.style = 'position:fixed;bottom:10px;left:10px;background:#ffdddd;color:#900;padding:8px;border-radius:4px;z-index:9999;';
+          body.appendChild(banner);
+        }
+      }
+    });
   </script>
 </body>
 </html>

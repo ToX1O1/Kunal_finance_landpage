@@ -1,26 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. Mobile Menu Toggle ---
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('.navbar-inner nav');
-    const navLinks = document.getElementById('nav-links');
+    const navLinks = document.querySelector('.nav-links'); // use class selector
+
+    if (!menuToggle || !nav) return;
 
     menuToggle.addEventListener('click', () => {
         nav.classList.toggle('open');
         const icon = menuToggle.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
     });
 
     // Close menu when a link is clicked (for mobile)
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.remove('open');
-            const icon = menuToggle.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+    if (navLinks) {
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
         });
-    });
+    }
 
     // --- 2. Modal/Join Us Functionality ---
     const modal = document.getElementById('leadModal');

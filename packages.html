@@ -23,6 +23,7 @@
       --accent-color: #4facfe; 
       --text-color: #f0f6fc;
       --bg-dark: #0d111c;
+      --dark-bg: #0d111c;
       --bg-dark-alt: #161b22;
       --card-bg: #212133;
       --border-color: #21262d;
@@ -323,44 +324,74 @@
     }
     
     /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .mobile-toggle {
-        display: block;
-      }
-      .navbar-inner {
-        position: relative;
-      }
-      nav {
+   @media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .hero-visual {
+        order: -1;
+    }
+    .stat-profit, .stat-users {
+        position: static;
+        margin: 20px auto;
+        width: 80%;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .navbar-inner nav {
+        display: none;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: rgba(18, 18, 30, 0.95);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-      }
-      .nav-links.open {
-        max-height: 300px;
-        padding: 1rem 0;
-      }
-      .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        padding: 0;
-      }
-      .packages-grid {
-        grid-template-columns: 1fr;
-      }
-      .package-card.highlight {
-          transform: scale(1.0); /* Avoid too much scaling on small screens */
-      }
-      .tier-header {
-        margin-top: 1rem;
-      }
+        background-color: var(--dark-bg);
+        border-top: 1px solid var(--border-color);
+        padding: 10px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
+    .navbar-inner nav.open {
+        display: flex;
+        z-index: 110;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+    }
+    .nav-links li a {
+        padding: 15px 20px;
+        display: block;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .nav-link.active::after, .nav-link:hover::after {
+        width: 5px;
+        height: 80%;
+        top: 10%;
+        left: 0;
+        transform: scaleY(1);
+    }
+    .nav-link:not(.active)::after {
+        transform: scaleY(0);
+    }
+    .mobile-toggle {
+        display: block;
+    }
+
+    /* Contact Section Responsive */
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .contact-form {
+        padding: 30px;
+    }
+}
+
   </style>
 
 </head>
@@ -596,8 +627,8 @@
           <div>
             <h5>Contact Us</h5>
             <ul class="footer-links">
-              <li><a><i class="fas fa-phone"></i> +91 81690 02642</a></li>
-              <li><a ><i class="fas fa-envelope"></i> info@growgeniuss.in</a></li>
+              <li><a><i class="fas fa-phone"></i> +91 98195 07137</a></li>
+              <li><a ><i class="fas fa-envelope"></i> geniussgrow@gmail.com</a></li>
               <li><a ><i class="fas fa-map-marker-alt"></i> Grow Geniuss, Sanpada, Thane, Pin: 400705</a></li>
               <li><a ><i class="fas fa-map-marker-alt"></i> PN-C/7, G Block BKC, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051, India</a></li>
             </ul>
@@ -616,22 +647,25 @@
   <script>
     // 1. Mobile Menu Toggle
     const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
+    const nav = document.querySelector('.navbar-inner nav'); // toggle this element (CSS uses nav.open)
+    const navLinks = document.getElementById('nav-links'); // the UL (kept for reference)
     const navLinkEls = document.querySelectorAll('.nav-links a');
 
     menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      menuToggle.querySelector('i').classList.toggle('fa-bars');
-      menuToggle.querySelector('i').classList.toggle('fa-times');
+      nav.classList.toggle('open');
+      const icon = menuToggle.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
     });
 
     // Close menu when a link is clicked (for mobile)
     navLinkEls.forEach(link => {
       link.addEventListener('click', () => {
-        if (navLinks.classList.contains('open')) {
-          navLinks.classList.remove('open');
-          menuToggle.querySelector('i').classList.remove('fa-times');
-          menuToggle.querySelector('i').classList.add('fa-bars');
+        if (nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          const icon = menuToggle.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
         }
       });
     });
